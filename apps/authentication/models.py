@@ -13,20 +13,21 @@ class UserManager(BaseUserManager):
             email=self.normalize_email(email)
         )
         user.set_password(password)
-        user.save()
+        user.save(using=self._db)
         return user
 
     
     def create_staffuser(self, email, password):
-        user =  self.create_user(email=email, password=password)
+        user =  self.create_user(email, password=password)
         user.staff = True
-        user.save()
+        user.save(using=self._db)
         return user
 
     def create_superuser(self, email, password):
-        user = self.create_user(email=email, password=password)
+        user = self.create_user(email, password=password)
         user.staff = True
         user.admin = True
+        user.save(using= self._db)
         return user
 
 
@@ -42,6 +43,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'email'
 
+    class Meta:
+        ordering = ['-date_joined']
+
     def __str__(self):
         return f"{self.email}"
 
@@ -53,6 +57,19 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def get_shortname(self):
         return self.email.split('@')[0]
+    @property
+    def is_staff(self):
+        return self.staff
+
+    @property
+    def is_admin(self):
+        return self.admin
+
+    def has_perm(self, obj=None):
+        return True
+    
+    def has_module_perms(self, app_label):
+        return True
 
     
 
