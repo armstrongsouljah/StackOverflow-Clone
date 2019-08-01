@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+
+         
+                {% block main_content %}
+                <div class="card p-1">
+                        <p class="display-5 text-center">{{question.title}}</p>
+                        <p class="small"> {{question.question}}</p>
+                        {% if request.user == question.author %}
+                        <ul class="nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'questions:update' question_slug=question.question_slug %}">Edit</a>
+                            </li>
+                            <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'questions:delete' question_slug=question.question_slug %}">Delete</a>
+                            </li>
+                        </ul>
+                        {% endif %}
+
+                        
+                </div>
+                
+                {% endblock %}
+        
+                {% block side_content %}
+                        Related questions. 
+                        <ul class="list-group">
+                            <li class="list-group-item">Question Link</li>
+                            <li class="list-group-item">Question Link</li>
+                            <li class="list-group-item">Question Link</li>
+                            <li class="list-group-item">Question Link</li>
+                        </ul>
+                {% endblock %}

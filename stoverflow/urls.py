@@ -17,10 +17,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
+from apps.questions.views import QuestionListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('apps.authentication.urls', namespace='authentication'))
+    path('accounts/', include('apps.authentication.urls', namespace='authentication')),
+    path('questions/', include('apps.questions.urls', namespace='questions')),
+    path('', QuestionListView.as_view(), name='home'),
 ]
 
 if settings.DEBUG:

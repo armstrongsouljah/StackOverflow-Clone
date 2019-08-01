@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+    
+{% block main_content %}
+    <div class="col col-md-8 col-lg-8 offset-md-2 offset-lg-2">
+        <h5 class="text-uppercase text-center lead mt-1">Post a new question below</h5>
+        <form method="POST">
+            {% csrf_token %}
+            {{form|crispy}}
+            <input type="submit" class="btn btn-success btn-block" value="Post Question">
+        </form>
+    </div>
+{% endblock %}
+    
+   
