@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+        <ul class="list-group list-group-flush">
+            {% for question in questions %}
+              <li class="list-group-item">
+                  <a class="nav-link" href="{% url 'questions:detail' question_slug=question.question_slug %}">{{question.title}}</a>
+              </li>
+            {% empty %}
+            {% endfor %}
+        </ul>
+{% endblock %}
+
+{% block side_content %}
+  <ul class="list-group list-group-flush">
+      <li class="listgrou-item">Sample </li>
+  </ul>
+{% endblock %}

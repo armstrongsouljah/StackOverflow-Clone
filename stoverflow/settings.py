@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
 
-    'apps.authentication'
+    'apps.authentication',
+    'apps.questions',
 ]
 
 MIDDLEWARE = [
@@ -81,6 +82,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'stoverflow.wsgi.application'
 
 AUTH_USER_MODEL = 'authentication.User'
+LOGOUT_REDIRECT_URL = '/'
 
 
 # Database

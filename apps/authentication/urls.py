@@ -14,6 +14,7 @@ app_name = 'authentication'
 # ]
 urlpatterns = [
     path('login/', V.LoginView.as_view(), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('register/', V.RegistrationView.as_view(), name='register'),
     path('password_reset/', auth_views.PasswordResetView.as_view(template_name='password_reset.html', success_url='/accounts/password_reset/done'), name='password_reset'),
     path('password_reset/done', auth_views.PasswordResetCompleteView.as_view(template_name='password_reset_done.html'), name='password_reset_done'),
