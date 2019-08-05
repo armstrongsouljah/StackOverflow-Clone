@@ -1,0 +1,11 @@
+{% load crispy_forms_tags %}
+
+{% block main_content %}
+    <form method="POST" class="form-inline">
+        {% csrf_token %}
+        {{form|crispy}}
+        <input type="submit" class="btn btn-success ml-1 small" value="Post Comment">
+    </form>
+{% endblock %}
+    
+   

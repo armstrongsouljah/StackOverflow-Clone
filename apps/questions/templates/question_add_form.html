@@ -2,14 +2,28 @@
 {% load crispy_forms_tags %}
     
 {% block main_content %}
-    <div class="col col-md-8 col-lg-8 offset-md-2 offset-lg-2">
-        <h5 class="text-uppercase text-center lead mt-1">Post a new question below</h5>
+    <div class="card-panel col s8 offset-s2">
+        <p class="center flow-text uppercase">Post a new question below</p>
         <form method="POST">
             {% csrf_token %}
             {{form|crispy}}
-            <input type="submit" class="btn btn-success btn-block" value="Post Question">
+            <input type="submit" class="btn" value="Post Question">
         </form>
     </div>
 {% endblock %}
-    
+
+{% block extra_js %}
+  <script>
+     const tA = document.querySelector('textarea')
+     const form = document.querySelector('form')
+
+     tA.classList = ['materialize-textarea']
+     form.style.cssText = "padding:12px; "
+     
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems,);
+  });
+</script>
+{% endblock %}
    

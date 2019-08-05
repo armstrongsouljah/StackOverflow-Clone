@@ -1,9 +1,12 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic as g
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse_lazy, reverse
-from .forms import QuestionForm
-from .models import Question
+from .forms import QuestionForm, TagForm
+from .models import Question, Tag
+from apps.comments.forms import CommentForm
+from apps.comments.models import Comment
 
 
 
@@ -27,13 +30,22 @@ class QuestionListView(g.ListView):
         return qs
 
 
-class QuestionDetailView(g.DetailView):
+class QuestionDetailView(g.DetailView, g.CreateView):
     template_name = 'question_view.html'
     context_object_name = 'question'
+    form_class = CommentForm
 
     def get_object(self):
         slug = self.kwargs.get('question_slug')
         return get_object_or_404(Question, question_slug=slug)
+
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.object_id = self.get_object().pk
+        instance.content_type = ContentType.objects.get(app_label='questions', model='question')
+        instance.author = self.request.user
+        self.success_url = self.get_object().get_absolute_url()
+        return super(QuestionDetailView, self).form_valid(form)
 
 
 class QuestionUpdateView(LoginRequiredMixin, g.UpdateView):
@@ -61,4 +73,11 @@ class QuestionDeleteView(LoginRequiredMixin, g.DeleteView):
         slug = self.kwargs.get('question_slug')
         return get_object_or_404(Question, question_slug=slug)
 
-
+class TagAddView(g.CreateView):
+    form_class = TagForm
+    template_name = 'tag_add.html'
+    success_url = '/accounts/profile'
+    
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        return super(TagAddView, self).form_valid(form)
