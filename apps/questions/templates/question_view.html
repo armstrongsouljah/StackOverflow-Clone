@@ -1,26 +1,39 @@
 {% extends 'base.html' %}
 
-
-         
-                {% block main_content %}
-                <div class="card p-1">
-                        <p class="display-5 text-center">{{question.title}}</p>
-                        <p class="small"> {{question.question}}</p>
-                        {% if request.user == question.author %}
-                        <ul class="nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'questions:update' question_slug=question.question_slug %}">Edit</a>
-                            </li>
-                            <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'questions:delete' question_slug=question.question_slug %}">Delete</a>
-                            </li>
-                        </ul>
-                        {% endif %}
-
-                        
-                </div>
-                
-                {% endblock %}
+        {% block main_content %}
+        <div class="card p-1">
+                <p class="display-5 text-center">{{question.title}}</p>
+                <p class="small"> {{question.question}}</p>
+                {% if request.user == question.author %}
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'questions:update' question_slug=question.question_slug %}">Edit</a>
+                    </li>
+                    <li class="nav-item">
+                            <a class="nav-link" href="{% url 'questions:delete' question_slug=question.question_slug %}">Delete</a>
+                    </li>
+                </ul>
+                {% endif %}
+                <hr>
+                Comments:
+                    {% for item in question.comments.all %} 
+                    <div class="media">
+                        <i class="fas fa-user-circle fa-2x align-self-center mr-2"></i>
+                        <div class="media-body">
+                            <p class="small">
+                                    {{item.comment}}
+                            </p>
+                            <p class="mb-0 small">By: {{item.author.get_shortname}} {{item.commented_at|timesince}} ago.</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                <hr>
+                {% if request.user.is_authenticated %}
+                    {% include 'question_comment_form.html' %}
+                {% endif %}
+        </div>
+        
+        {% endblock %}
         
                 {% block side_content %}
                         Related questions. 
@@ -30,4 +43,17 @@
                             <li class="list-group-item">Question Link</li>
                             <li class="list-group-item">Question Link</li>
                         </ul>
+                {% endblock %}
+
+                {% block extra_js%}
+                 <script>
+                  $('#id_comment').attr('rows', 1)
+                  $('#id_comment').css({
+                      resize:'none'
+                  })
+                  $('label').css({
+                      display:'none',
+                  })
+
+                 </script>
                 {% endblock %}

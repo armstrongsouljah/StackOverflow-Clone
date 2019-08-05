@@ -42,9 +42,11 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'crispy_forms',
+    'crispy_forms_materialize',
 
     'apps.authentication',
     'apps.questions',
+    'apps.comments'
 ]
 
 MIDDLEWARE = [
@@ -137,7 +139,7 @@ STATICFILES_DIRS = [
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 #CRISPY_FORMS
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CRISPY_TEMPLATE_PACK = 'materialize_css_forms'
 
 # Email Setup
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
