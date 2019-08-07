@@ -3,6 +3,8 @@ from django.conf import settings
 from django.db.models.signals import pre_save
 from utils.helper_funcs import create_unique_slug
 from django.urls import reverse
+from django.contrib.contenttypes.fields import GenericRelation
+from apps.comments.models import Comment
 
 User = getattr(settings, 'AUTH_USER_MODEL')
 
@@ -14,6 +16,8 @@ class Question(models.Model):
     question = models.TextField(verbose_name='Detail')
     question_slug = models.CharField(blank=True, max_length=250)
     date_asked = models.DateTimeField(verbose_name='Asked On', auto_now_add=True)
+    comments = GenericRelation(Comment)
+
 
     def __str__(self):
         return f"{self.title}"
