@@ -1,40 +1,6 @@
-{% comment %}
-<nav class=" navbar navbar-expand-lg navbar-dark bg-info">
-    <div class="container">
-        <a class="navbar-brand" href="{% url 'home' %}"> <i class="fa fa-globe"></i> &Rightarrow; <i class="fa fa-book"></i></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'home' %}">Questions</a>
-            </li>
-            <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search courses">
-                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-                  </form>
-          </ul>
-
-          <ul class="navbar-nav ml-auto">
-              {% if request.user.is_authenticated %}
-                <li class="nav-item">
-                        <a class="nav-link" href="{% url 'questions:add' %}">Post a Question</a>
-                </li>
-              {% endif %}
-          </ul>
-          
-        </div>
-        </div>
-      </nav>
-
-  {% endcomment %}
-  <ul id="dropdown1" class="dropdown-content">
+<ul id="dropdown1" class="dropdown-content">
       {% if request.user.is_authenticated %}
+    <li><a href="{% url 'authentication:profile' %}">Profile</a></li>
     <li><a href="{% url 'authentication:logout' %}">Logout</a></li>
     {% else %}
     <li><a href="{% url 'authentication:login' %}">Login</a></li>
@@ -42,12 +8,12 @@
     <li><a href="{% url 'authentication:register' %}">Register</a></li>
     {% endif %}
                     
-  </ul>
+</ul>
 
 <div class="navbar-fixed">
       <nav>
-        <div class="nav-wrapper teal darken-3">
-          <a href="#" class="brand-logo">SToverflow</a>
+        <div class="nav-wrapper teal darken-2">
+          <a href="/" class="brand-logo">st-overflow</a>
           <ul id="nav-mobile" class="right hide-on-med-and-down">
               {% if request.user.is_authenticated %}
                 <li>

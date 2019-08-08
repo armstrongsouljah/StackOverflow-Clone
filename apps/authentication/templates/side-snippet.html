@@ -1,0 +1,7 @@
+<div class="col s3 grey darken-2 side-panel">
+    <ul class="collection">
+        <li class="collection-item"><a href="/accounts/profile/">Home</a></li>
+        <li class="collection-item"><a href="/accounts/profile/{{request.user.get_shortname}}/change/">Edit Profile</a></li>
+        <li class="collection-item"><a href="{% url 'questions:add' %}">Post Question</a></li>
+    </ul>
+ </div>

@@ -1,17 +1,24 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
-<div class="col s8 offset-2">
-{% block main_content %}
 
+{% block main_content %}
+            <div class="center">
             {% if next %}
             {% if user.is_authenticated %}
-            <p>Your account doesn't have access to this page. To proceed,
-            please login with an account that has access.</p>
-            {% else %}
-            <p>Please login to see this page.</p>
+                <p>
+                    Your account doesn't have access to this page. To proceed,
+                    please login with an account that has access.
+                </p>
+                {% else %}
+                <p>
+                    Please login to see this page.
+                </p>
+                {% endif %}
             {% endif %}
-        {% endif %}
-        <div class="card-panel">
+            </div>
+            <p class="center flow-text">STACK OVERFLOW</p>
+            
+        <div class="card-panel col s6 offset-s3 grey lighten-3">
             <form action="/accounts/login/" method="POST">
                 {% csrf_token %}
                 {{form|crispy}}
@@ -26,7 +33,12 @@
             </form>
         </div>
 {% endblock %}
-</div>
-{% block side_content %}{% endblock %}
+
+{% block extra_js %}
+<script>
+    const form = document.querySelector('form');
+    form.style.cssText = "padding:12px;"
+</script>
+{% endblock %}
 
 {% block footer_content %}{% endblock %}
