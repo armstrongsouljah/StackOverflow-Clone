@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block page_title %}{{request.user.get_shortname}}{% endblock %}
+{% block extra_css %}
+<style>
+    .side-panel, .main-panel{
+        height: 720px;
+        padding-top: 19px;
+    }
+</style>
+{% endblock %}
+
+{% block main_content %}
+{% include 'side-snippet.html' %}
+  <div class="col s9 blue-grey lighten-5 main-panel">
+      <p class="flow-text center">WELCOME {{request.user.get_shortname|upper}}</p>
+      <div class="card-panel">
+          {{profile.bio}}
+      </div>
+      <span class="divider"></span>
+  </div>
+{% endblock %}

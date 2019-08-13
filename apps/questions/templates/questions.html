@@ -1,14 +1,16 @@
 {% extends 'base.html' %}
 
 {% block main_content %}
-        <ul class="list-group list-group-flush">
-            {% for question in questions %}
-              <li class="list-group-item">
-                  <a class="nav-link" href="{% url 'questions:detail' question_slug=question.question_slug %}">{{question.title}}</a>
-              </li>
-            {% empty %}
-            {% endfor %}
-        </ul>
+       <ul class="collection">
+         {% for item in questions %}
+         <li class="collection-item avatar">
+           <img src="http://lorempixel.com/g/400/200"  alt="question image" class="circle"/>
+           <span class="title"><a href="{% url 'questions:detail' question_slug=item.question_slug %}">{{item.title}}</a></span>
+           <p>{{item.question|truncatechars:12}}</p>
+           <p>Posted: {{item.date_asked|timesince}} ago.</p>
+         </li>
+         {% endfor %}
+       </ul>
 {% endblock %}
 
 {% block side_content %}

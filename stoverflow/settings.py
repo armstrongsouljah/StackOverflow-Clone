@@ -46,7 +46,8 @@ INSTALLED_APPS = [
 
     'apps.authentication',
     'apps.questions',
-    'apps.comments'
+    'apps.comments',
+    'apps.profiles',
 ]
 
 MIDDLEWARE = [
