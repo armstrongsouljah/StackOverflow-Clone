@@ -16,3 +16,18 @@
     </div>
 </div>
 {% endblock %}
+
+{% block extra_js %}
+  <script>
+     const tA = document.querySelector('textarea')
+     const form = document.querySelector('form')
+
+     tA.classList = ['materialize-textarea']
+     form.style.cssText = "padding:12px; "
+     
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems,);
+  });
+</script>
+{% endblock %}
