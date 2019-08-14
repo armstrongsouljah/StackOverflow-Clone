@@ -73,6 +73,7 @@ class QuestionDeleteView(LoginRequiredMixin, g.DeleteView):
         slug = self.kwargs.get('question_slug')
         return get_object_or_404(Question, question_slug=slug)
 
+
 class TagAddView(g.CreateView):
     form_class = TagForm
     template_name = 'tag_add.html'
