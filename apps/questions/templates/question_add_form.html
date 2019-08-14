@@ -20,7 +20,10 @@
      tA.classList = ['materialize-textarea']
      form.style.cssText = "padding:12px; "
      
-  </script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems,);
+  });
+</script>
 {% endblock %}
-    
    

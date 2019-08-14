@@ -7,9 +7,8 @@
              <blockquote>
                  {{question.question}} <br/> 
                  Posted by: {{question.author.get_shortname}} {{question.date_asked|timesince}} ago.
+                 <p>Tags: {% for tag in question.tags.all %} #{{tag.name}} {% endfor %}</p>
              </blockquote>
-
-
 
              <p>Comments:</p>
              <ul class="collection">
@@ -41,13 +40,13 @@
             <div class="col s8 card-panel">
                 Leave a comment below.
                 <form method="POST">
+                    {% csrf_token %}
                     {{form|crispy}}
                     <input type="submit" class="btn teal darken-2" value="Comment">
                 </form>
             </div>
     {% endif %}
         {% endblock %}
-
 
         {% block extra_js%}
             <script>

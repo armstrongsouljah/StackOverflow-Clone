@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% block page_title %}{{request.user.get_shortname}}{% endblock %}
 {% block extra_css %}
 <style>
@@ -14,11 +15,11 @@
   <div class="col s9 blue-grey lighten-5 main-panel">
       <p class="flow-text center">WELCOME {{request.user.get_shortname|upper}}</p>
       <div class="card-panel">
-          {% if  profile.bio %}
-           <p>{{profile.bio}}</p>
-           {% else %}
-           <p class="grey-text">Please provide a bio editing your profile</p>
-          {% endif %}
+          <form method="POST">
+              {% csrf_token %}
+                {{form|crispy}}
+                <input type="submit" class="btn teal btn-waves" value="Save Tag">
+          </form> 
       </div>
       <span class="divider"></span>
   </div>

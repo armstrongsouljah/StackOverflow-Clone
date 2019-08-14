@@ -3,5 +3,6 @@
         <li class="collection-item"><a href="/accounts/profile/">Home</a></li>
         <li class="collection-item"><a href="/accounts/profile/{{request.user.get_shortname}}/change/">Edit Profile</a></li>
         <li class="collection-item"><a href="{% url 'questions:add' %}">Post Question</a></li>
+        <li class="collection-item"><a href="{% url 'questions:add-tag' %}">Create Tag</a></li>
     </ul>
  </div>

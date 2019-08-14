@@ -3,8 +3,8 @@ from django.views import generic as g
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse_lazy, reverse
-from .forms import QuestionForm
-from .models import Question
+from .forms import QuestionForm, TagForm
+from .models import Question, Tag
 from apps.comments.forms import CommentForm
 from apps.comments.models import Comment
 
@@ -72,3 +72,13 @@ class QuestionDeleteView(LoginRequiredMixin, g.DeleteView):
     def get_object(self):
         slug = self.kwargs.get('question_slug')
         return get_object_or_404(Question, question_slug=slug)
+
+
+class TagAddView(g.CreateView):
+    form_class = TagForm
+    template_name = 'tag_add.html'
+    success_url = '/accounts/profile'
+    
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        return super(TagAddView, self).form_valid(form)
