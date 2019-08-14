@@ -47,6 +47,12 @@ class QuestionDetailView(g.DetailView, g.CreateView):
         self.success_url = self.get_object().get_absolute_url()
         return super(QuestionDetailView, self).form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        related = Question.objects.filter(tags__in=self.get_object().tags.all())
+        context['related_questions'] = [q for q in related if q.title != self.get_object().title]
+        return context
+
 
 class QuestionUpdateView(LoginRequiredMixin, g.UpdateView):
     template_name = 'question_update.html'
