@@ -18,6 +18,11 @@ class RegistrationView(g.CreateView):
     template_name= 'signup.html'
     success_url = '/'
 
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        print(form.data)
+        return super(RegistrationView, self).form_valid(form)
+
 
 class ProfileView(m.LoginRequiredMixin, g.DetailView):
     model = Profile
