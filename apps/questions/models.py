@@ -46,4 +46,5 @@ def pre_save_question_receiver(instance, *args, **kwargs):
     if not instance.question_slug:
         instance.question_slug = create_unique_slug(instance.title)
 
+
 pre_save.connect(pre_save_question_receiver, sender=Question)
