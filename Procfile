@@ -1,1 +1,1 @@
-web:gunicorn stoverflow.wsgi
+web: gunicorn stoverflow.wsgi
